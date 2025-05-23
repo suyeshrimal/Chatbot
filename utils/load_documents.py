@@ -8,8 +8,8 @@ from langchain.document_loaders import (
 )
 from pathlib import Path
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+
 
 
 def choose_loader(file_path):
@@ -36,6 +36,4 @@ def load_and_embed_documents(file_path):
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     split_docs = splitter.split_documents(docs)
 
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    db = Chroma.from_documents(split_docs, embedding=embeddings)
-    return db
+    return split_docs
