@@ -1,4 +1,5 @@
 AI Chatbot with Document QA & Appointment Booking
+
 This project is a chatbot designed for answering questions based on uploaded documents and facilitating appointment bookings. It is built using LangChain, Streamlit, and Google Generative AI (Gemini API).
 
 Features
