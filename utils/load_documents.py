@@ -3,8 +3,8 @@ from langchain.document_loaders import (
     PyPDFLoader,
     Docx2txtLoader,
     CSVLoader,
-    UnstructuredHTMLLoader,  # This one is fairly light
-    UnstructuredExcelLoader  # Optional – consider replacing
+    UnstructuredHTMLLoader,  
+    UnstructuredExcelLoader  
 )
 from pathlib import Path
 from langchain.text_splitter import RecursiveCharacterTextSplitter

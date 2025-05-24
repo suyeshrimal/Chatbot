@@ -21,7 +21,7 @@ def build_agent_with_tools():
     agent_executor = initialize_agent(
         tools=tools,
         llm=llm,
-        agent=AgentType.OPENAI_FUNCTIONS,  # Works with Gemini too
+        agent=AgentType.OPENAI_FUNCTIONS,
         verbose=True,
         handle_parsing_errors=True,
     )
