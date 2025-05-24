@@ -1,36 +1,20 @@
-# from langchain.agents import tool
-
-# import re
-# import dateparser
-# from langchain.tools import tool
+from langchain.tools import tool
+from utils.validators import validate_inputs
+from utils.date_parser import extract_date
 
 
-# def validate_email(email):
-#     return bool(re.match(r"[^@]+@[^@]+\.[^@]+", email))
+@tool
+def appointment_agent(name: str, phone: str, email: str, date: str) -> str:
+    """
+    Tool to book an appointment by collecting user name, phone, email, and preferred date.
+    The tool validates inputs and extracts date in YYYY-MM-DD format.
+    """
+    valid, message = validate_inputs(name, phone, email)
+    if not valid:
+        return message
 
+    formatted_date = extract_date(date)
+    if not formatted_date:
+        return "Invalid or unrecognized date format. Try 'next Monday' or '2025-06-01'."
 
-# def validate_phone(phone):
-#     return bool(re.match(r"^\+?\d{10,15}$", phone))
-
-
-# def parse_date(text):
-#     parsed_date = dateparser.parse(text)
-#     if parsed_date:
-#         return parsed_date.strftime("%Y-%m-%d")
-#     return None
-
-
-# @tool
-# def book_appointment_tool(name: str, email: str, phone: str, date: str) -> str:
-#     """Tool to book an appointment with a user."""
-#     if not validate_email(email):
-#         return "Invalid email format."
-#     if not validate_phone(phone):
-#         return "Invalid phone number format."
-#     if not dateparser.parse(date):
-#         return "Invalid date format."
-
-#     return f"Appointment booked for {name} on {date}.\nContact: {phone}, {email}"
-def appointment_agent(name, phone, email, date):
-    # This can be expanded to integrate Google Calendar, CRM, etc.
-    return f"Appointment scheduled for {name} ({email}, {phone}) on {date}."
+    return f"Appointment booked for {name} on {formatted_date}. Contact: {email}, {phone}."
